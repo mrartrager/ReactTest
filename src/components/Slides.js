@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 function Slides({slides}) {
     const [slideIndex, setSlideIndex] = React.useState(0);
@@ -27,14 +28,21 @@ function Slides({slides}) {
         }
     }
 
-
+    const next = () => {
+        if (slideIndex != slides.length - 1){
+            setSlideIndex(slideIndex + 1);
+            document.getElementById("previous").disabled = false;
+            document.getElementById("restart").disabled = false;
+    } else {
+        document.getElementById("next").disabled = true;
+    }
 
     return (
         <div>
             <div id="navigation" className="text-center">
-                <button data-testid="button-restart" className="small outlined">Restart</button>
-                <button data-testid="button-prev" className="small">Prev</button>
-                <button data-testid="button-next" className="small">Next</button>
+                <button onClick={restart} id="restart" data-testid="button-restart" className="small outlined">Restart</button>
+                <button onClick={previous} id="previous" data-testid="button-prev" className="small">Prev</button>
+                <button onClick={next} id="next" data-testid="button-next" className="small">Next</button>
             </div>
             <div id="slide" className="card text-center">
                 <h1 data-testid="title">Slide Title Here</h1>
@@ -44,5 +52,5 @@ function Slides({slides}) {
     );
 
 }
-
+}
 export default Slides;
