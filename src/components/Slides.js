@@ -1,6 +1,33 @@
 import React from 'react';
 
 function Slides({slides}) {
+    const [slideIndex, setSlideIndex] = React.useState(0);
+    
+    useEffect(() => {
+        if (slideIndex === 0) {
+            document.getElementById("previous").disabled = true;
+            document.getElementById("restart").disabled = true;
+        }
+    });
+
+    const restart = () => {
+        if(slideIndex != 0){
+            setSlideIndex(0);
+            document.getElementById("restart").disabled = true;
+        }
+    };
+
+    const previous = () => {
+        if (slideIndex != 0){
+            setSlideIndex(slideIndex - 1);
+            document.getElementById("next").disabled = false;
+        } else {
+            document.getElementById("previous").disabled = true;
+            document.getElementById("next").disabled = false;
+        }
+    }
+
+
 
     return (
         <div>
